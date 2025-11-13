@@ -1,10 +1,11 @@
-# """
-# Vercel Serverless Function Wrapper for FastAPI
-# This file enables running FastAPI on Vercel using Mangum adapter.
+"""
+Vercel Serverless Function Wrapper for FastAPI
+This file enables running FastAPI on Vercel using Mangum adapter.
 
-# Note: This is for Option 2 (Full-stack on Vercel).
-# For recommended approach, deploy frontend only to Vercel.
-# """
+Full-stack deployment on Vercel:
+- Frontend: Static build served at /
+- Backend: API routes served at /api
+"""
 from mangum import Mangum
 import sys
 import os
@@ -17,5 +18,6 @@ sys.path.insert(0, backend_path)
 from app.main import app
 
 # Create Mangum handler for Vercel
+# lifespan="off" because Vercel functions are request-scoped
 handler = Mangum(app, lifespan="off")
 
