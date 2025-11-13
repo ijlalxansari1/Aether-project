@@ -1,0 +1,13 @@
+backend/
+node_modules/
+.git/
+*.db
+uploads/
+mlruns/
+.env
+.env.local
+__pycache__/
+*.pyc
+venv/
+.venv/
+
