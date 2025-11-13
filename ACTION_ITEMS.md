@@ -253,7 +253,7 @@ Check Errors:
 
 ---
 
-## 📊 WHAT'S HAPPENING BEHIND THE SCENES
+## 🎯 WHAT'S HAPPENING BEHIND THE SCENES
 
 ```
 When you set env variables:
@@ -261,16 +261,24 @@ When you set env variables:
 Vercel detects changes
   ↓
 Auto-builds your app:
-  ├─ npm run build (frontend)
-  ├─ pip install -r requirements.txt (backend)
-  └─ Bundles everything
+  ├─ Frontend Build: npm run build (creates frontend/dist)
+  ├─ Backend Packaging: pip install -r requirements.txt
+  └─ Wraps FastAPI with Mangum for serverless (api/index.py)
   ↓
 Deploys to edge network:
-  ├─ Static files → CDN
-  └─ Python functions → Serverless
+  ├─ frontend/dist → CDN (globally distributed, cached)
+  └─ api/index.py → Serverless Functions (auto-scaling)
+  ↓
+Routing:
+  ├─ / → frontend/dist (React app)
+  └─ /api/* → api/index.py (FastAPI backend)
   ↓
 ✅ Live at: https://your-project.vercel.app
+   ├─ Frontend: / (React)
+   └─ Backend: /api (FastAPI)
 ```
+
+**Note**: Both frontend/ and backend/ are in the same root directory - this is CORRECT! See `PROJECT_STRUCTURE.md` for details.
 
 ---
 
